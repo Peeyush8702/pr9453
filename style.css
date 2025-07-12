@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  color: white;
+}
+
+video#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card, .shivani-card, .admin-panel, .login-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+button, .btn {
+  padding: 12px 25px;
+  background: #fff;
+  color: #ff5e78;
+  border: none;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 15px;
+  display: inline-block;
+}
+
+button:hover, .btn:hover {
+  background: #ffe0e9;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.toggle-password {
+  text-align: left;
+  font-size: 14px;
+  margin: 5px 0 10px 0;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.gallery img {
+  width: 150px;
+  border-radius: 10px;
+}

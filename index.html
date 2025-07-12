@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background: url('fallback.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    video#bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      border-radius: 10px;
+      width: 400px;
+      height: auto;
+      text-align: center;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .login-container label {
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      user-select: none;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 15px;
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .login-container button:hover {
+      background-color: #004494;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 400px) {
+      .login-container {
+        width: 90%;
+        padding: 30px 20px;
+      }
+
+      .login-container h2 {
+        font-size: 20px;
+      }
+
+      .toggle-password {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Video -->
+  <video autoplay muted loop id="bg-video" onerror="this.style.display='none'">
+    <source src="https://videos.pexels.com/video-files/9945238/9945238-uhd_2560_1440_24fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Dark overlay -->
+  <div class="overlay"></div>
+
+  <!-- Login Form -->
+  <div class="login-container">
+    <h2>Admin Login</h2>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="password">Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="password" name="password" required />
+        <span id="togglePassword" class="toggle-password">👁️</span>
+      </div>
+
+      <button type="submit">Login</button>
+      <div id="error" class="error-message"></div>
+    </form>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+      const passwordInput = document.getElementById('password');
+      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+      this.textContent = passwordInput.type === 'password' ? '👁️' : '🙈';
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const error = document.getElementById('error');
+
+      const adminUsername = 'admin';
+      const adminPassword = '1234';
+
+      if (username === adminUsername && password === adminPassword) {
+        alert('Login successful! Redirecting...');
+        window.location.href = 'dashboard.html'; // Replace with your destination
+      } else {
+        error.textContent = 'Invalid username or password.';
+        setTimeout(() => error.textContent = '', 3000);
+      }
+    });
+  </script>
+</body>
+</html>

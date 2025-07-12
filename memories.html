@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shivani's Memories</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      color: white;
+    }
+
+    video#bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: -3;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -2;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: rgba(15, 32, 39, 0.85);
+      backdrop-filter: blur(6px);
+      color: white;
+      padding: 30px 20px;
+    }
+
+    .sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 30px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      background-color: rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 40px;
+    }
+
+    .main h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      transition: 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .container { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 🎥 Background Video -->
+<video autoplay muted loop id="bg-video">
+  <source src="https://videos.pexels.com/video-files/32915865/14028219_1920_1080_30fps.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+<canvas id="confetti"></canvas>
+
+<!-- Layout -->
+<div class="container">
+  <div class="sidebar">
+    <h2>📸 Memories</h2>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="wishes.html">💌 Wishes</a>
+    <a href="index.html">🚪 Logout</a>
+  </div>
+
+  <div class="main">
+    <h1>💖 Beautiful Moments with Shivani 💖</h1>
+    <div class="gallery">
+      <img src="https://github.com/Peeyush8702/TheMontagem/blob/main/IMG_9062.JPG?raw=true" alt="memory1">
+      <img src="https://github.com/Peeyush8702/TheMontagem/blob/main/IMG_9224.JPG?raw=true" alt="memory2">
+      <img src="https://github.com/Peeyush8702/TheMontagem/blob/main/IMG_9077.JPG?raw=true" alt="memory3">
+      <img src="https://github.com/Peeyush8702/TheMontagem/blob/main/IMG_20250326_215825724_HDR_AE.jpg?raw=true" alt="memory4">
+      <img src="" alt="memory5">
+      <img src="https://via.placeholder.com/400x300?text=Magic+6" alt="memory6">
+      <!-- Add real photos if hosted or from OneDrive/public link -->
+    </div>
+  </div>
+</div>
+
+<!-- 🎊 Confetti Script -->
+<script>
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const confetti = Array.from({ length: 100 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 6 + 2,
+    dx: Math.random() * 2 - 1,
+    dy: Math.random() * 3 + 1,
+    color: `hsl(${Math.random() * 360}, 100%, 70%)`
+  }));
+
+  function animateConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let p of confetti) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+      ctx.fillStyle = p.color;
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.y > canvas.height) p.y = 0;
+      if (p.x > canvas.width) p.x = 0;
+    }
+    requestAnimationFrame(animateConfetti);
+  }
+  animateConfetti();
+</script>
+
+</body>
+</html>
